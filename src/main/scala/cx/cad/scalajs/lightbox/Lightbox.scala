@@ -43,9 +43,25 @@ case class ImageSet(imageSetDiv: Node) {
   private def onlyAnchors(child: Node) = { Names.tag_anchor.equals(child.nodeName) }
 
   def insertRender(): Node = {
+    bindClicks()
     val r = render
     println(s"Appending ${r.toString}")
     imageSetDiv.appendChild(r)
+  }
+
+  def bindClicks(): Unit = {
+    images.foreach { image =>
+      def handler(e: Event): Boolean = {
+        e.preventDefault()
+        e.stopPropagation()
+        dom.window.location.hash = image.idAsAttr
+        false
+      }
+      image.anchor.addEventListener("click", handler, useCapture = true)
+      val cls = dom.document.createAttribute("class")
+      cls.value = "enhanced"
+      image.anchor.attributes.setNamedItem(cls)
+    }
   }
 
   def render: Node = {
@@ -55,7 +71,7 @@ case class ImageSet(imageSetDiv: Node) {
 
   override def toString: String = s"ImageSet with ${images.size} images: $images"
 }
-class Image(anchor: Node,
+class Image(val anchor: Node,
             val id: Int,
             var previous: Option[Image] = None,
             var next: Option[Image] = None
@@ -76,6 +92,8 @@ class Image(anchor: Node,
     println(s"Evaluating anchor child ${child.nodeName}")
     Names.tag_img.equals(child.nodeName)
   }
+
+  def idAsAttr: String = s"image-$id"
 
   override def toString: String = s"Image(title = $title, thumbnail = $thumbnail, fullsize = $fullsize)"
 }
@@ -107,7 +125,7 @@ object ImageRenderer {
     imageDiv.render
   }
 
-  def idAttrFor(image: Image): String = { s"image-${image.id}" }
+  def idAttrFor(image: Image): String = { image.idAsAttr }
 
   def prevLinkFor(image: Image): JsDom.TypedTag[Anchor] = link(s"#${image.previous.map(idAttrFor).head}", Names.class_prev, s"Prev: ${image.previous.map(_.title).head}")
   def nextLinkFor(image: Image): JsDom.TypedTag[Anchor] = link(s"#${image.next.map(idAttrFor).head}", Names.class_next, s"Next: ${image.next.map(_.title).head}")
