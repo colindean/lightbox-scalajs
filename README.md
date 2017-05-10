@@ -7,9 +7,23 @@ See `index-dev.html` for an example of the HTML structure to use. Include the Ja
 and it will find the divs with class of `image_set`. It will use the contents then to create the rest of
  the lightbox infrastructure.
 
+## Using
+
+Include this in your HTML, probably at the bottom:
+
+    <script
+    src="https://cdn.rawgit.com/colindean/lightbox-scalajs/releases/download/0.0.2/lightbox-scala-js-opt.js"
+    async></script>
+
+then look at `style.css` to get the styles and `index-dev.html` to see the HTML
+structure of the `image_set` divs.
+
+
 ## History
 
 [Brigette Lefever](https://github.com/brareme) wanted a lightbox for her website, a single page, static HTML
 site without having to manually maintain a large amount of HTML. She was OK with including JavaScript but was
 not quite comfortable enough yet with the language to code it up herself. I jumped at the opportunity to try
 Scala.js for a project!
+
+
