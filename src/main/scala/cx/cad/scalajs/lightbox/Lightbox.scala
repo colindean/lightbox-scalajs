@@ -53,7 +53,7 @@ case class ImageSet(imageSetDiv: Node) {
     div( images.map(ImageRenderer.render) ).render
   }
 
-  override def toString: String = s"ImageSet with ${images.size} images: ${images}"
+  override def toString: String = s"ImageSet with ${images.size} images: $images"
 }
 class Image(anchor: Node,
             val id: Int,
