@@ -1,0 +1,15 @@
+{
+  "name": "lightbox-scalajs",
+  "version": "1.0.0",
+  "description": "A lightbox widget written in Scala.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Colin Dean",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^9.12.0",
+    "source-map-support": "^0.4.14"
+  }
+}
