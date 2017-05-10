@@ -30,8 +30,9 @@ deploy:
     - target/scala-2.12/lightbox-scala-js-opt.js.map
     - target/scala-2.12/lightbox-scala-js-fastopt.js
     - target/scala-2.12/lightbox-scala-js-fastopt.js.map
-    - target/scala-2.12/lightbox-scala-js-jsdeps.js
-    - target/scala-2.12/lightbox-scala-js-jsdeps.min.js
+    # restore these if there is ever anything in them
+    #- target/scala-2.12/lightbox-scala-js-jsdeps.js
+    #- target/scala-2.12/lightbox-scala-js-jsdeps.min.js
   on:
     tags: true
     repo: colindean/lightbox-scalajs
