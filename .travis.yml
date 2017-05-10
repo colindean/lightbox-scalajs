@@ -1,0 +1,37 @@
+language: scala
+sudo: false
+scala:
+- 2.12.1
+jdk:
+- oraclejdk8
+install:
+- ". $HOME/.nvm/nvm.sh"
+- nvm install stable
+- nvm use stable
+- npm install
+- npm install jsdom source-map-support
+script:
+- sbt ++$TRAVIS_SCALA_VERSION fastOptJS fullOptJS
+before_cache:
+- find $HOME/.sbt -name "*.lock" -type f -delete
+- find $HOME/.ivy2/cache -name "ivydata-*.properties" -type f -delete
+cache:
+  directories:
+  - "$HOME/.sbt/0.13/dependency"
+  - "$HOME/.sbt/boot/scala*"
+  - "$HOME/.sbt/launchers"
+  - "$HOME/.ivy2/cache"
+deploy:
+  provider: releases
+  api_key:
+    secure: NjNrcJG9qQKJ5wxdkq/tntko4fv2ePiWHCkjA7W66J89gEaZZaUp8tyFt35vscgC3GizuxNRbNRYGqN5WVumYu4bIeFF01Ts06nW+mrhoGGcNPxQzOxin4aefMDDNrlr5fHkSCOP/sWncuDcHKOXrNF0fR13WtkS3SKmJWJzBMYLa38HMuqfTCAVrHsR/pNw44HiwiEWW2HaMEfPoO6+juyS54Ol2dZQgdpoeajA1OLVWOfKoMfUyEiTaja926GgvNTldTd7oIAC/QMEsb0cOSQUY7Zy4Stxc0NySjJjJQFl51tEivJYeUyYfUtwZPrscCvzugOTbwNW4j37oECSm2LqpRhxlxm5yN7iHI+4jGSAgSANBjZl6spmOqT5n87m3uG+65Y7KtNIN1mKenzWmTYH3/qa7+USBp52HddzDKj47zvdKq4a/6cEOR4fZkfK6TvP0M5nWaFEqa3ozXIzGZJ58WYw3wpCEu/EULpCBrNOhzd/paJNe5LsxH7Q1mHi7KwT11e9nmd/AeSxDRrN0VEdduy3j08uIEhAl6hwZAP+R7FY48GB287ak5VX3+Pi+3NGObuoOwdiC8DDHY8DrhDxxIijwyNLOiQpwYW0Iij0EpXZwQqoIhDGo93BaO8gwTrY5yXhjQYxmLVVE6hVU0qfbGZmoxA0ZR5uA26K3Z8=
+  file: 
+    - target/scala-2.12/lightbox-scala-js-opt.js
+    - target/scala-2.12/lightbox-scala-js-opt.js.map
+    - target/scala-2.12/lightbox-scala-js-fastopt.js
+    - target/scala-2.12/lightbox-scala-js-fastopt.js.map
+    - target/scala-2.12/lightbox-scala-js-jsdeps.js
+    - target/scala-2.12/lightbox-scala-js-jsdeps.min.js
+  on:
+    tags: true
+    repo: colindean/lightbox-scalajs
