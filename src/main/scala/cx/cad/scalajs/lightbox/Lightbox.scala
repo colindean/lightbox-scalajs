@@ -109,8 +109,6 @@ object ImageRenderer {
 
   def idAttrFor(image: Image): String = { s"image-${image.id}" }
 
-  //TODO: figure out how to handle the linkage between them
-
   def prevLinkFor(image: Image): JsDom.TypedTag[Anchor] = link(s"#${image.previous.map(idAttrFor).head}", Names.class_prev, s"Prev: ${image.previous.map(_.title).head}")
   def nextLinkFor(image: Image): JsDom.TypedTag[Anchor] = link(s"#${image.next.map(idAttrFor).head}", Names.class_next, s"Next: ${image.next.map(_.title).head}")
   def closeLink: JsDom.TypedTag[Anchor] = link("#page", Names.class_close, "Close")
