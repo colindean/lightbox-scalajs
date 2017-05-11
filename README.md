@@ -9,15 +9,12 @@ and it will find the divs with class of `image_set`. It will use the contents th
 
 ## Using
 
-Include this in your HTML, probably at the bottom:
+Get a release from the [releases page](https://github.com/colindean/lightbox-scalajs/releases) and copy it locally. Include something like this in your HTML, probably at the bottom:
 
-    <script
-    src="https://cdn.rawgit.com/colindean/lightbox-scalajs/releases/download/0.0.2/lightbox-scala-js-opt.js"
-    async></script>
+    <script src="lightbox-scala-js-opt.js" async></script>
 
 then look at `style.css` to get the styles and `index-dev.html` to see the HTML
 structure of the `image_set` divs.
-
 
 ## History
 
